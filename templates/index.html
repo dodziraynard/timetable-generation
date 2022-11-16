@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Genetic Timetable Gen</title>
+</head>
+
+<body>
+  <form action="{{url_for('timetable')}}">
+    <div class=" d-flex m-3">
+      <div class="card col-md-6 mx-auto">
+        <div class="card-header">
+          <h4>LECTURE HALL DETAILS</h4>
+        </div>
+        <div class="card-body">
+          <div id="slot-rows-container">
+            <template id="slot-row-template">
+              <div id="slot-row" class="d-flex justify-content-center align-items-center">
+                <div>
+                  <label for="slot_names">Name</label>
+                  <input required class="form-control" type="text" name="slot_names" placeholder="Name">
+                </div>
+                <div>
+                  <label for="slot_start_times">Start time</label>
+                  <input required class="form-control" type="time" name="slot_start_times" placeholder="Start Time">
+                </div>
+                <div>
+                  <label for="slot_end_times">End time</label>
+                  <input required class="form-control" type="time" name="slot_end_times" placeholder="End Time">
+                </div>
+                <div>
+                  <label for="slot_capacities">Capacity</label>
+                  <input required class="form-control" type="number" min="1" value="10" name="slot_capacities"
+                    placeholder="Capacity">
+                </div>
+                <div>
+                  <label for="slot_days">Day</label>
+                  <select required class="form-select" name="slot_days" id="slot_days">
+                <option value="monday">Monday</option>
+                  <option value="tuesday">Tuesday</option>
+                  <option value="wednesday">Wednesday</option>
+                  <option value="thursday">Thursday</option>
+                  <option value="friday">Friday</option>
+                  <option value="saturday">Saturday</option>
+                  <option value="sunday">Sunday</option>
+                </select>
+                </div>
+                <div class="">
+                  <br>
+                  <button type="button" class="remove-button btn btn-sm btn-danger m-3">Remove</button>
+                </div>
+              </div>
+            </template>
+
+            <div class="d-flex justify-content-center align-items-center">
+              <div>
+                <label for="slot_names">Name</label>
+                <input required class="form-control" type="text" name="slot_names" placeholder="Name">
+              </div>
+              <div>
+                <label for="slot_start_times">Start time</label>
+                <input required class="form-control" type="time" name="slot_start_times" placeholder="Start Time">
+              </div>
+              <div>
+                <label for="slot_end_times">End time</label>
+                <input required class="form-control" type="time" name="slot_end_times" placeholder="End Time">
+              </div>
+              <div>
+                <label for="slot_capacities">Capacity</label>
+                <input required class="form-control" type="number" min="1" value="10" name="slot_capacities"
+                  placeholder="Capacity">
+              </div>
+              <div>
+                <label for="slot_days">Day</label>
+                <select required class="form-select" name="slot_days" id="slot_days">
+              <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+              </select>
+              </div>
+              <div class="">
+                <br>
+                <button type="button" class="remove-button btn btn-sm btn-danger m-3">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-5 mx-auto">
+            <p class="text-end">
+              <button type="button" id="add-slot-button" class="btn btn-sm btn-primary">Add row</button>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div class="col-md-6 mx-auto ps-2">
+        <div class="card">
+          <div class="card-header">
+            <h4>EVENTS</h4>
+          </div>
+          <div class="card-body">
+            <div id="event-rows-container">
+              <template id="event-row-template">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div>
+                    <label for="event_names">Name</label>
+                    <input required class="form-control" type="text" name="event_names" placeholder="Name">
+                  </div>
+                  <div>
+                    <label for="event_durations">Duration (min)</label>
+                    <input required class="form-control" type="number" min="1" name="event_durations"
+                      placeholder="Duration in minutes">
+                  </div>
+                  <div>
+                    <label for="event_capacities">Capacity</label>
+                    <input required class="form-control" type="number" min="1" value="10" name="event_capacities"
+                      placeholder="End Time">
+                  </div>
+                  <div>
+                    <label for="event_codes">Code</label>
+                    <input required class="form-control" type="text" name="event_codes" placeholder="e.g, 103">
+                  </div>
+                  <div class="">
+                    <br>
+                    <button type="button" class="remove-button btn btn-sm btn-danger m-3">Remove</button>
+                  </div>
+                </div>
+              </template>
+
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex justify-content-center align-items-center">
+                  <div>
+                    <label for="event_names">Name</label>
+                    <input required class="form-control" type="text" name="event_names" placeholder="Name">
+                  </div>
+                  <div>
+                    <label for="event_durations">Duration (min)</label>
+                    <input required class="form-control" type="number" name="event_durations"
+                      placeholder="Duration in minutes">
+                  </div>
+                  <div>
+                    <label for="event_capacities">Capacity</label>
+                    <input required class="form-control" type="number" min="1" value="10" name="event_capacities"
+                      placeholder="End Time">
+                  </div>
+                  <div>
+                    <label for="event_codes">Code</label>
+                    <input required class="form-control" type="text" name="event_codes" placeholder="e.g, 103">
+                  </div>
+                  <div class="">
+                    <br>
+                    <button type="button" class="remove-button btn btn-sm btn-danger m-3">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="my-5 mx-auto">
+              <p class="text-end">
+                <button type="button" id="add-event-button" class="btn btn-sm btn-primary">Add row</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <p class="text text-center">
+      <button class="btn btn-primary p-3">Generate Timetable</button>
+    </p>
+  </form>
+
+
+  <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+
+</html>
